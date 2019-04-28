@@ -1,0 +1,25 @@
+{
+  "name": "space",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Asbert Ma <stayinalive@msn.cn>",
+  "license": "ISC",
+  "dependencies": {
+    "pixi.js": "4.8.7"
+  },
+  "devDependencies": {
+    "css-loader": "2.1.1",
+    "file-loader": "3.0.1",
+    "html-webpack-plugin": "3.2.0",
+    "mini-css-extract-plugin": "0.6.0",
+    "webpack": "4.30.0",
+    "webpack-cli": "3.3.1",
+    "webpack-dev-server": "3.3.1"
+  }
+}
