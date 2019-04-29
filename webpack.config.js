@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const webpack = require('webpack')
 
 module.exports = {
   entry: './src/index.js',
@@ -12,21 +13,6 @@ module.exports = {
   devServer: {
     contentBase: './dist'
   },
-  // optimization: {
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       vendors: {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         priority: -10
-  //       },
-  //       default: {
-  //         minChunks: 2,
-  //         priority: -20,
-  //         reuseExistingChunk: true
-  //       }
-  //     }
-  //   }
-  // },
   plugins: [
     new HtmlWebpackPlugin({
       inject: 'body',
@@ -59,8 +45,6 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              // you can specify a publicPath here
-              // by default it uses publicPath in webpackOptions.output
               publicPath: '../',
               hmr: process.env.NODE_ENV === 'development'
             }
