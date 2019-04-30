@@ -4,14 +4,14 @@ const Star = (app) => {
   // const starTexture = PX.Texture.from(starPng)
   let starTexture = PX.Texture.fromImage(require('./assets/star.png'))
 
-  let starAmount = 500
+  let starAmount = 800
   let cameraZ = 0
   let fov = 20
   let baseSpeed = 0.025
   let speed = 1
   let warpSpeed = 0
   let starStretch = 5
-  let starBaseSize = 0.05
+  let starBaseSize = 0.06
 
   // Create the stars
   let stars = []
