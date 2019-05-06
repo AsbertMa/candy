@@ -1,6 +1,13 @@
 import * as PX from 'pixi.js'
 
 const rocket = (app) => {
+  const container = new PX.Container()
+  container.x = 1300
+  container.y = 540
+  container.scale.x = 1.2
+  container.scale.y = 1.2
+  app.stage.addChild(container)
+
   const fire = new PX.Sprite(PX.Texture.from(require('./assets/fire.png')))
   const ship = new PX.Sprite(PX.Texture.from(require('./assets/ship.png')))
 
@@ -8,8 +15,8 @@ const rocket = (app) => {
   const shipScX = 0.003
   const shipScY = 0.005
 
-  fire.x = 1130
-  fire.y = 173
+  fire.x = 217
+  fire.y = 3
   fire.anchor.y = 0.5
   fire.anchor.x = 0.08
   fire.scale.y = 0.6
@@ -17,16 +24,13 @@ const rocket = (app) => {
 
   let isZoomP = false
 
-  ship.x = 915
-  ship.y = 170
-
-  ship.scale.x = 1
-  ship.scale.y = 1
+  ship.x = 0
+  ship.y = 0
   ship.anchor.x = 0.5
   ship.anchor.y = 0.5
 
-  app.stage.addChild(fire)
-  app.stage.addChild(ship)
+  container.addChild(fire)
+  container.addChild(ship)
 
   app.ticker.add(() => {
     if (fire.scale.x > 1.1) {
