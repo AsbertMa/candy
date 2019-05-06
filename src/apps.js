@@ -14,7 +14,11 @@ async function getApp() {
 
 const createApps = async (xBase, yBase) => {
   const list = await getApp()
-  return list.map(item => {
+  list.sort((a, b) => {
+    return 0.5 - Math.random()
+  })
+
+  return list.slice(0, 4).map(item => {
     return {
       ...item,
       img: `https://vechain.github.io/app-hub/imgs/${item.id}.png`,
