@@ -17,6 +17,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: 'body',
       title: 'Candy',
+      template: 'index.html',
       files: {
         css: 'main.css',
         chunks: {

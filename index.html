@@ -4,9 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
-  <script src="./src/index.js"></script>
+  <div></div>
+  <div id="canvas"></div>
+  <div class="mask">
+    <div>
+      <div id="app-content" class="modal dapp">
+        <div class="icon"></div>
+        <div class="name"></div>
+        <div class="desc"></div>
+        <div>
+          <button>OK, next</button>
+        </div>
+        <a target="_blank">Take me back</a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
