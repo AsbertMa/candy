@@ -4,16 +4,79 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: #343B63;
+  /* background-color: #343; */
   position: relative;
 }
 
-canvas {
+#canvas {
+  position: relative;
+}
+
+#canvas, canvas {
   width: 80vw;
   height: 48vw;
   min-width: 800px;
   min-height: 480px;
   display: block;
   margin: auto;
+}
+
+canvas, #step1 {
+  position: absolute;
+}
+
+#step1 {
+  color: #fff;
+  font-family: 'Courier New';
+  top: calc(28% - 100px);
+  left: calc(25% - 160px);
+  overflow: hidden;
+  height: 0;
+  width: 410px;
+  -webkit-transition: height 1s ease-out;
+  -o-transition: height 1s ease-out;
+  transition: height 1s ease-out;
+}
+
+#step1.show {
+  height: 100%;
+}
+
+#step1 h1 {
+  font-size: 3.2rem;
+  font-weight: lighter;
+}
+
+#step1 p {
+  font-size: 1.3rem;
+}
+
+#step1 button {
+  background-image: url('../assets/button.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 10rem;
+  height: 2.5rem;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 0;
+  outline: none;
+  margin-top: 2rem;
+}
+
+#step1 button:hover {
+  cursor: pointer;
+}
+
+#step1 button:active {
+  outline: none;
+}
+
+#step1 button:last-of-type {
+  margin-left: 2rem;
 }
 
 .mask {
@@ -24,11 +87,13 @@ canvas {
   top: 0;
   background-color: rgba(0, 0, 0, 0.2);
 }
-.mask > div {
+
+.mask>div {
   position: relative;
   height: 100%;
   width: 100%;
 }
+
 .mask .modal {
   width: 400px;
   height: 400px;
