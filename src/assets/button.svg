@@ -1,0 +1,14 @@
+<svg width="200px" height="50px" viewBox="0 0 160 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <linearGradient x1="0%" y1="53.125%" x2="100%" y2="46.875%" id="linearGradient-1">
+            <stop stop-color="#4D4098" offset="0%"></stop>
+            <stop stop-color="#9A93C4" offset="72.2543353%"></stop>
+            <stop stop-color="#FEFEFC" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-Copy-13" transform="translate(-181.000000, -646.000000)" stroke="url(#linearGradient-1)">
+            <rect id="Rectangle" x="181.5" y="646.5" width="159" height="39" rx="19.5"></rect>
+        </g>
+    </g>
+</svg>
