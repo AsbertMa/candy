@@ -1,14 +1,13 @@
 import * as PX from 'pixi.js'
+import App from './createCanvas.js'
 const Star = (app) => {
-  // const starPng = require('./assets/star.png')
-  // const starTexture = PX.Texture.from(starPng)
   let starTexture = PX.Texture.fromImage(require('./assets/star.png'))
 
   let starAmount = 800
   let cameraZ = 0
   let fov = 20
   let baseSpeed = 0.025
-  let speed = 1
+  let speed = 0
   let warpSpeed = 0
   let starStretch = 5
   let starBaseSize = 0.06
@@ -78,7 +77,12 @@ const Star = (app) => {
   })
 
   return {
-  speedHigh}
+    speedHigh
+  }
 }
 
-export default Star
+const createStar = () => {
+  return Star(App.instance)
+}
+
+export default createStar

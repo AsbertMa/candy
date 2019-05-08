@@ -1,3 +1,4 @@
+import App from './createCanvas'
 import * as PX from 'pixi.js'
 
 const rocket = (app) => {
@@ -32,7 +33,7 @@ const rocket = (app) => {
   container.addChild(fire)
   container.addChild(ship)
 
-  app.ticker.add(() => {
+  const tickerFc = () => {
     if (fire.scale.x > 1.1) {
       isZoomP = false
     }
@@ -49,7 +50,18 @@ const rocket = (app) => {
       ship.scale.x += shipScX
       fire.scale.x -= fireScX
     }
-  })
-}
+  }
 
-export default rocket
+  app.ticker.add(tickerFc)
+
+  return {
+    destroy: () => {
+      app.ticker.remove(tickerFc)
+      container.destroy()
+    }
+  }
+}
+const createRocket = () => {
+  return rocket(App.instance)
+} 
+export default createRocket

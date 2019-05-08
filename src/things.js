@@ -1,7 +1,7 @@
 export default [
   {
-    img: require('./assets/ship1.png'),
-    x: 800,
-    y: 300
+    img: require('./assets/connex.png'),
+    x: 0,
+    y: 0
   }
 ]

@@ -1,3 +1,4 @@
+import App from './createCanvas'
 import * as PX from 'pixi.js'
 
 const SpaceMan = (app) => {
@@ -13,14 +14,14 @@ const SpaceMan = (app) => {
 
   strip.x = 0
   strip.y = 0
-  let snakeContainer = new PX.Container()
-  snakeContainer.x = 0
-  snakeContainer.y = 500
-  app.stage.addChild(snakeContainer)
-  snakeContainer.addChild(strip)
-  snakeContainer.addChild(man)
+  let container = new PX.Container()
+  container.x = 0
+  container.y = 500
+  app.stage.addChild(container)
+  container.addChild(strip)
+  container.addChild(man)
 
-  app.ticker.add(function () {
+  const tickerFc = () => {
     count += 0.01
     for (let i = 0; i < points.length; i++) {
       points[i].y = Math.sin((i * 0.3) + count) * 30
@@ -28,8 +29,18 @@ const SpaceMan = (app) => {
     }
     man.x = points[19].x - 50
     man.y = points[19].y - 80
-    
-  })
-}
+  }
 
-export default SpaceMan
+  app.ticker.add(tickerFc)
+
+  return {
+    destroy() {
+      app.ticker.remove(tickerFc)
+      container.destroy()
+    }
+  }
+}
+const createSpaceMan = () => {
+  return SpaceMan(App.instance)
+}
+export default createSpaceMan
