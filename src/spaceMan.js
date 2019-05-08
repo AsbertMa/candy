@@ -10,12 +10,12 @@ const SpaceMan = (app) => {
 
   let strip = new PX.mesh.Rope(PX.Texture.fromImage(require('./assets/path.png')), points)
   let man = new PX.Sprite(PX.Texture.fromImage(require('./assets/fly.png')))
+
   strip.x = 0
   strip.y = 0
   let snakeContainer = new PX.Container()
   snakeContainer.x = 0
   snakeContainer.y = 500
-  man.x = 1100
   app.stage.addChild(snakeContainer)
   snakeContainer.addChild(strip)
   snakeContainer.addChild(man)
