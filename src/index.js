@@ -1,7 +1,7 @@
 import './style/index.css'
 
-import App from './createCanvas'
-import { setFontSize, bindEvent, showModal } from './eventBind'
+import './createCanvas'
+import { setFontSize, bindEvent, showModal, showCounter, showText, hideText } from './eventBind'
 import createStar from './createStar'
 import createRocket from './createRocket'
 import createSpaceMan from './createSpaceMan'
@@ -21,10 +21,10 @@ function start () {
 
   const firstViewInit = () => {
     rocket = createRocket()
-    App.showText()
+    showText()
   }
   const firstViewDestroy = () => {
-    App.hideText()
+    hideText()
     rocket.destroy()
   }
   const secViewInit = async () => {
@@ -43,11 +43,12 @@ function start () {
   const onNext = () => {
     firstViewDestroy()
     secViewInit()
+    showCounter()
   }
 
   const onBack = () => {
-    secViewDestroy()
-    firstViewInit()
+    // secViewDestroy()
+    // firstViewInit()
   }
 
   star.speedHigh().then(() => {

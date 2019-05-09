@@ -30,16 +30,40 @@ canvas, #step1 {
   font-family: 'Courier New';
   top: calc(28% - 100px);
   left: calc(25% - 160px);
-  overflow: hidden;
-  height: 0;
+  display: none;
+  /* transform: translate(310px, 0) scale(0); */
   width: 410px;
-  -webkit-transition: height 1s ease-out;
-  -o-transition: height 1s ease-out;
-  transition: height 1s ease-out;
+  /* transition: all 0.5s ease-in-out; */
 }
 
 #step1.show {
-  height: 100%;
+  display: block;
+  animation: show 0.5s ease-in-out 0.1s 1 normal both;
+}
+#step1.hide {
+  animation: hide 0.5s ease-in-out 0.1s 1 normal both;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translate(310px, 0) scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-3100px, 0) scale(10);
+  }
 }
 
 #step1 h1 {
@@ -79,6 +103,10 @@ canvas, #step1 {
   margin-left: 2rem;
 }
 
+.font-new {
+  font-family: 'Courier New';
+}
+
 .mask {
   display: none;
   width: 100%;
@@ -105,4 +133,77 @@ canvas, #step1 {
   bottom: 0;
   margin: auto;
   border-radius: 15px;
+}
+
+#app-content {
+  text-align: center;
+  padding: 0 40px;
+}
+
+#app-content .icon {
+  width: 95px;
+  height: 95px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+#app-content .icon img {
+  width: 100%;
+  border-radius: 7px;
+}
+
+#app-content .name {
+  font-size: 28px;
+  padding: 20px 0 15px;
+}
+
+#app-content .desc {
+  text-align: left;
+  font-size: 18px;
+  line-height: 22px;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 3;
+}
+
+.button {
+  outline: none;
+  border: none;
+  width: 160px;
+  height: 44px;
+  display: inline-block;
+  border-radius: 22px;
+  line-height: 44px;
+  color: #fff;
+  font-size: 22px;
+  text-align: center;
+  text-decoration: none;
+  margin: 15px 0;
+  background: -webkit-gradient( linear, left bottom, right top, from(#33A3D6), to(#38D9CC));
+  background: -webkit-linear-gradient( bottom left, #33A3D6, #38D9CC);
+  background: -o-linear-gradient( bottom left, #33A3D6, #38D9CC);
+  background: linear-gradient( to top right, #33A3D6, #38D9CC);
+}
+
+#app-content #explore:hover {
+  cursor: pointer;
+}
+
+#back {
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+#counter {
+  color: #fff;
+  font-size: 22px;
+  width: 80vw;
+  margin: auto;
+  text-align: right;
+  padding: 10px 20px 0;
+  opacity: 0;
 }

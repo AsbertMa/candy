@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title><%= htmlWebpackPlugin.options.title %></title>
-</head>
-<body>
-  <div></div>
-  <div id="canvas">
-    <div class="step-1" id="step1">
-      <h1>Claim Free Tokens</h1>
-      <p>Explore the word to discover awesome applications to win up to 3x bonus or you can claim directly </p>
-      <button id="claim" class="claim"> Claim </button>
-      <button id="explore" class="explorer"> Explore </button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <div id="counter" class="font-new">
+      <span>0</span>/4 item found <a class="button">Claim</a>
     </div>
-  </div>
-  <div id="mask" class="mask">
-    <div>
-      <div id="app-content" class="modal dapp">
-        <div class="icon"></div>
-        <div class="name"></div>
-        <div class="desc"></div>
-        <div>
-          <button>OK, next</button>
-        </div>
-        <a id="back" target="_blank">Take me back</a>
+    <div id="canvas">
+      <div class="step-1" id="step1">
+        <h1>Claim Free Tokens</h1>
+        <p>
+          Explore the word to discover awesome applications to win up to 3x
+          bonus or you can claim directly
+        </p>
+        <button id="claim" class="claim">Claim</button>
+        <button id="explore" class="explorer">Explore</button>
       </div>
     </div>
-  </div>
-</body>
+    <div id="mask" class="mask font-new">
+      <div>
+        <div id="app-content" class="modal dapp">
+          <div class="icon">
+            <img
+              src="https://vechain.github.io/app-hub/imgs/org.vepress.vepress.png"
+            />
+          </div>
+          <div class="name">VePress</div>
+          <div class="desc">
+            VeChain powered CMS/SNS with Social Tipping and Smart Contract
+            Extensions
+          </div>
+          <div>
+            <a id="toInfo" target="_blank" class="font-new button">Explore</a>
+          </div>
+          <a id="back" target="_blank">Take me back</a>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
