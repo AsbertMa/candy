@@ -21,11 +21,11 @@ function start () {
 
   const firstViewInit = () => {
     rocket = createRocket()
+    rocket.show()
     showText()
   }
   const firstViewDestroy = () => {
     hideText()
-    rocket.destroy()
   }
   const secViewInit = async () => {
     sm = createSpaceMan()
@@ -57,6 +57,8 @@ function start () {
 
   setFontSize()
 
-  bindEvent(onNext, onBack)
+  bindEvent(onNext, onBack, ()=> {
+    rocket.hide()
+  })
 }
 start()

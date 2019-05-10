@@ -20,13 +20,14 @@ export const hideText = () => {
 export const setFontSize = () => {
   const html = document.getElementsByTagName('html')[0]
   html.style.fontSize =
-    ((0.53 - 420 / canvasContainer.clientWidth) / 2 + 1) * 16 + 'px'
+    ((0.53 - 420 / canvasContainer.clientWidth) / 2.5 + 1) * 16 + 'px'
 }
-export const bindEvent = (nextCB, backCB) => {
+export const bindEvent = (nextCB, backCB, onStepEnd) => {
   step1.addEventListener('animationend', function(e) {
     if (e.animationName === 'hide') {
       this.classList.remove('show')
       this.classList.remove('hide')
+      onStepEnd && onStepEnd()
     }
   })
   back.addEventListener('click', () => {

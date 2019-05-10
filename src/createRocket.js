@@ -1,9 +1,12 @@
-import App from './createCanvas'
+import App, { ease, easein } from './createCanvas'
 import * as PX from 'pixi.js'
 
 const rocket = (app) => {
   const container = new PX.Container()
-  container.setTransform(1300, 540, 1.2, 1.2)
+  const startX = 2180
+  const endX = 1720
+  const width = app.view.width
+  container.setTransform(startX, 540, 0.6, 0.6)
   app.stage.addChild(container)
 
   const fire = new PX.Sprite(PX.Texture.from(require('./assets/fire.png')))
@@ -18,7 +21,7 @@ const rocket = (app) => {
   fire.setTransform(217, 3, 0.6, 0.6)
 
   let isZoomP = false
-  
+
   ship.setTransform(0, 0)
   ship.anchor.x = 0.5
   ship.anchor.y = 0.5
@@ -45,16 +48,58 @@ const rocket = (app) => {
     }
   }
 
-  app.ticker.add(tickerFc)
+  const moveIn = (time) => {
+    const now = Date.now()
+    const end = now + time
+    const dist = startX - endX
+    function moving () {
+      const dater = ease(1 - Math.max(0, ((end - Date.now()) / time)))
+      container.x = width - dist * dater
+      container.scale.x = 0.6 + 0.6 * dater
+      container.scale.y = 0.6 + 0.6 * dater
+      if (end < Date.now()) {
+        removeM()
+      }
+    }
+
+    function removeM () {
+      app.ticker.remove(moving)
+      app.ticker.add(tickerFc)
+      console.log(container.x, container.scale)
+    }
+    app.ticker.add(moving)
+  }
+
+  const moveOut = (time) => {
+    const now = Date.now()
+    const end = now + time
+    const dist = container.x + 300
+    function moving () {
+      const dater = easein(1 - Math.max(0, ((end - Date.now()) / time)))
+      container.x -= dist * dater
+      if (end < Date.now()) {
+        removeM()
+      }
+    }
+
+    function removeM () {
+      app.ticker.remove(tickerFc)
+      app.ticker.remove(moving)
+      container.destroy({children: true})
+    }
+    app.ticker.add(moving)
+  }
 
   return {
-    destroy: () => {
-      app.ticker.remove(tickerFc)
-      container.destroy()
+    show: () => {
+      moveIn(1000)
+    },
+    hide: () => {
+      moveOut(1000)
     }
   }
 }
 const createRocket = () => {
   return rocket(App.instance)
-} 
+}
 export default createRocket

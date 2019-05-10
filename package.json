@@ -11,6 +11,7 @@
   "author": "Asbert Ma <stayinalive@msn.cn>",
   "license": "ISC",
   "dependencies": {
+    "bezier-easing": "2.1.0",
     "pixi.js": "4.8.7"
   },
   "devDependencies": {

@@ -28,12 +28,10 @@ canvas, #step1 {
 #step1 {
   color: #fff;
   font-family: 'Courier New';
-  top: calc(28% - 100px);
+  top: calc(28% - 60px);
   left: calc(25% - 160px);
   display: none;
-  /* transform: translate(310px, 0) scale(0); */
   width: 410px;
-  /* transition: all 0.5s ease-in-out; */
 }
 
 #step1.show {
@@ -67,7 +65,7 @@ canvas, #step1 {
 }
 
 #step1 h1 {
-  font-size: 3.2rem;
+  font-size: 2.5rem;
   font-weight: lighter;
 }
 

@@ -1,6 +1,7 @@
 import * as PX from 'pixi.js'
-
-
+import BezierEasing from 'bezier-easing'
+export const ease = BezierEasing(0.25, 0.1, 0.25, 1.0)
+export const easein = BezierEasing(0.42, 0, 1.0, 1.0)
 
 const App = (function init () {
   const canvasContainer = document.querySelector('#canvas')
