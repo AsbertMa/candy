@@ -49,53 +49,59 @@ const rocket = (app) => {
   }
 
   const moveIn = (time) => {
-    const now = Date.now()
-    const end = now + time
-    const dist = startX - endX
-    function moving () {
-      const dater = ease(1 - Math.max(0, ((end - Date.now()) / time)))
-      container.x = width - dist * dater
-      container.scale.x = 0.6 + 0.6 * dater
-      container.scale.y = 0.6 + 0.6 * dater
-      if (end < Date.now()) {
-        removeM()
+    return new Promise((
+      resolve, reject
+    ) => {
+      const now = Date.now()
+      const end = now + time
+      const dist = startX - endX
+      function moving () {
+        const dater = ease(1 - Math.max(0, ((end - Date.now()) / time)))
+        container.x = width - dist * dater
+        container.scale.x = 0.6 + 0.6 * dater
+        container.scale.y = 0.6 + 0.6 * dater
+        if (end < Date.now()) {
+          removeM()
+        }
       }
-    }
 
-    function removeM () {
-      app.ticker.remove(moving)
-      app.ticker.add(tickerFc)
-      console.log(container.x, container.scale)
-    }
-    app.ticker.add(moving)
+      function removeM () {
+        resolve()
+        app.ticker.remove(moving)
+        app.ticker.add(tickerFc)
+      }
+      app.ticker.add(moving)
+    })
   }
 
   const moveOut = (time) => {
-    const now = Date.now()
-    const end = now + time
-    const dist = container.x + 300
-    function moving () {
-      const dater = easein(1 - Math.max(0, ((end - Date.now()) / time)))
-      container.x -= dist * dater
-      if (end < Date.now()) {
-        removeM()
+    return new Promise((resolve, reject) => {
+      const end = Date.now() + time
+      const dist = container.x + 300
+      function moving () {
+        const dater = easein(1 - Math.max(0, ((end - Date.now()) / time)))
+        container.x -= dist * dater
+        if (end < Date.now()) {
+          removeM()
+        }
       }
-    }
 
-    function removeM () {
-      app.ticker.remove(tickerFc)
-      app.ticker.remove(moving)
-      container.destroy({children: true})
-    }
-    app.ticker.add(moving)
+      function removeM () {
+        app.ticker.remove(tickerFc)
+        app.ticker.remove(moving)
+        container.destroy({children: true})
+        resolve()
+      }
+      app.ticker.add(moving)
+    })
   }
 
   return {
     show: () => {
-      moveIn(1000)
+      return moveIn(1000)
     },
     hide: () => {
-      moveOut(1000)
+      return moveOut(1000)
     }
   }
 }

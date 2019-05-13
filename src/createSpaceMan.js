@@ -1,9 +1,11 @@
-import App from './createCanvas'
+import App, { easeCus } from './createCanvas'
 import * as PX from 'pixi.js'
+import { resolve } from 'url'
 
 const SpaceMan = (app) => {
   let count = 0
   let ropeLength = 300 / 10
+  let endX = 0
   let points = []
   for (let i = 0; i < 20; i++) {
     points.push(new PX.Point(i * ropeLength, 0))
@@ -15,7 +17,7 @@ const SpaceMan = (app) => {
   strip.x = 0
   strip.y = 0
   let container = new PX.Container()
-  container.x = 0
+  container.x = 600
   container.y = 500
   app.stage.addChild(container)
   container.addChild(strip)
@@ -33,7 +35,32 @@ const SpaceMan = (app) => {
 
   app.ticker.add(tickerFc)
 
+  const moveIn = (time) => {
+    return new Promise((resolve, reject) => {
+      const end = Date.now() + time
+      const dist = endX - container.x
+      function move () {
+        container.x = dist * easeCus(Math.max(0, (end - Date.now()) / time))
+        if (end < Date.now()) {
+          removeM()
+        }
+      }
+
+      function removeM () {
+        resolve()
+        app.ticker.remove(move)
+      }
+
+      app.ticker.add(move)
+    })
+  }
+  const moveOut = () => {
+  }
+
   return {
+    show() {
+      return moveIn(9000)
+    },
     destroy() {
       app.ticker.remove(tickerFc)
       container.destroy()

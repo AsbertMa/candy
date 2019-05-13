@@ -1,37 +1,43 @@
 import './style/index.css'
 
 import './createCanvas'
-import { setFontSize, bindEvent, showModal, showCounter, showText, hideText } from './eventBind'
+import {
+  setFontSize,
+  bindEvent,
+  showModal,
+  showCounter,
+  showText,
+  hideText
+} from './eventBind'
 import createStar from './createStar'
 import createRocket from './createRocket'
 import createSpaceMan from './createSpaceMan'
 import createApps from './createApps'
 import createStatic from './createStatic'
 
-function start () {
+function start() {
   const star = createStar()
   let rocket = null
   let sm = null
   let apps = null
   let sts = null
 
-  const onAppClick = (appInfo) => {
+  const onAppClick = appInfo => {
     showModal(appInfo)
   }
-
   const firstViewInit = () => {
     rocket = createRocket()
     rocket.show()
     showText()
   }
-  const firstViewDestroy = () => {
-    hideText()
-  }
   const secViewInit = async () => {
     sm = createSpaceMan()
-    apps = await createApps(onAppClick)
+    sm.show()
+    apps = createApps(onAppClick)
+    apps.show()
     sts = createStatic()
   }
+
   const secViewDestroy = () => {
     sm.destroy()
     apps.destroy()
@@ -41,9 +47,13 @@ function start () {
     sts = null
   }
   const onNext = () => {
-    firstViewDestroy()
-    secViewInit()
-    showCounter()
+    hideText()
+  }
+  const onNextEnd = () => {
+    rocket.hide().then(() => {
+      secViewInit()
+      showCounter()
+    })
   }
 
   const onBack = () => {
@@ -57,8 +67,6 @@ function start () {
 
   setFontSize()
 
-  bindEvent(onNext, onBack, ()=> {
-    rocket.hide()
-  })
+  bindEvent(onNext, onBack, onNextEnd)
 }
 start()
