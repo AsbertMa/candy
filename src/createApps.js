@@ -62,9 +62,9 @@ function addApps(app, onAppClick) {
             this.alpha = 1
             this.scale.x *= 1.2
             this.scale.y *= 1.2
-            onAppClick && onAppClick(item.info)
           }
           this.checked = true
+          onAppClick && onAppClick(item.info)
         })
     })
   }
