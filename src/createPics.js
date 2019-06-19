@@ -4,7 +4,7 @@ const Pics = (resources) => {
   let result = []
   resources.forEach(item => {
     const temp = new PX.Sprite(PX.Texture.fromImage(item.img, true))
-    temp.setTransform(item.x, item.y, item.scaleX || 0.07, item.scaleY || 0.07)
+    temp.setTransform(item.x, item.y, item.scaleX || 0.07, item.scaleY || 0.07,item.rotate || 0 )
     temp.info = item
     result.push(temp)
   })
