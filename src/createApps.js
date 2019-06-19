@@ -2,7 +2,7 @@ import App, { linear } from './createCanvas'
 import createPics from './createPics'
 async function getApp() {
   try {
-    const resp = await fetch('http://192.168.117.23:3000/apps', {
+    const resp = await fetch('http://192.168.50.159:3000/apps', {
       method: 'GET'
     })
     if (resp.status !== 200) {

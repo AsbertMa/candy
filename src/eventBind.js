@@ -37,7 +37,9 @@ export const bindEvent = (nextCB, backCB, onStepEnd, onClaim) => {
   })
 
   counterClaim.addEventListener('click', function() {
-    onClaim && onClaim(_count)
+    if (_count === 4) {
+      onClaim && onClaim(_count)
+    }
   })
   claim.addEventListener('click', function() {
     onClaim && onClaim(0)

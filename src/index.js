@@ -12,8 +12,8 @@ import {
 import createStar from './createStar'
 import createRocket from './createRocket'
 import createSpaceMan from './createSpaceMan'
-import createApps, { getCheckInfo } from './createApps'
 import createStatic from './createStatic'
+import createApps, { getCheckInfo } from './createApps'
 import claimRequest from './claimRequest'
 
 function start() {
@@ -34,12 +34,9 @@ function start() {
   }
 
   const onClaim = async num => {
-    let info = {}
-    if (num) {
-      info = getCheckInfo()
-    }
+    let info = getCheckInfo()
     const resp = await claimRequest(
-      num ? info.key : null,
+      info.key,
       num ? info.rands : null
     )
     console.log(resp)
@@ -48,9 +45,10 @@ function start() {
   const secViewInit = async () => {
     sm = createSpaceMan()
     sm.show()
-    apps = createApps(onAppClick)
-    apps.show()
     sts = createStatic()
+    apps = createApps(onAppClick)
+    sts.show()
+    apps.show()
   }
 
   const secViewDestroy = () => {

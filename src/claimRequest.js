@@ -1,7 +1,29 @@
-//: Connex.Vendor.SigningService.CertResponse & Connex.Vendor.SigningService.CertMessage
+import { load } from 'recaptcha-v3'
+
+function getReToken() {
+  let token = ''
+  load('6LfUrJEUAAAAAB5JbNLHVyhIjKdDDiUPMkz8Ea0g', {
+    useRecaptchaNet: true
+  }).then(re => {
+    re.execute('claim').then(res => {
+      console.log(res)
+      token = res
+    })
+  })
+
+  return {
+    get: () => {
+      return token
+    }
+  }
+}
+
+const token = getReToken()
+
+// Connex.Vendor.SigningService.CertResponse & Connex.Vendor.SigningService.CertMessage
 const postRequest = async content => {
   try {
-    const resp = await fetch('http://192.168.117.23:3000/requests', {
+    const resp = await fetch('http://192.168.50.159:3000/requests', {
       method: 'post',
       mode: 'cors',
       cache: 'no-cache',
@@ -45,6 +67,6 @@ Select a wallet  which you would like to receive the tokens`
   }
 
   // const token = await this.$recaptcha('claim');
-  postRequest({ ...result, ...msg, key, codes })
+  return postRequest({ ...result, ...msg, key, codes, token: token.get() })
 }
 export default claimRequest

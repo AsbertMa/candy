@@ -7,7 +7,6 @@ const rocket = (app) => {
   const endX = 1720
   const width = app.view.width
   container.setTransform(startX, app.view.height/2, 0.6, 0.6)
-  console.log(app.view.height)
   app.stage.addChild(container)
 
   const fire = new PX.Sprite(PX.Texture.from(require('./assets/fire.png')))
