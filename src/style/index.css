@@ -171,15 +171,16 @@ canvas, #step1 {
 .button {
   outline: none;
   border: none;
-  width: 160px;
-  height: 44px;
+  width: 120px;
+  height: 30px;
   display: inline-block;
   border-radius: 22px;
-  line-height: 44px;
+  line-height: 32px;
   color: #fff;
-  font-size: 22px;
+  font-size: 16px;
   text-align: center;
   text-decoration: none;
+  cursor: pointer;
   margin: 15px 0;
   background: -webkit-gradient( linear, left bottom, right top, from(#33A3D6), to(#38D9CC));
   background: -webkit-linear-gradient( bottom left, #33A3D6, #38D9CC);
