@@ -6,9 +6,10 @@ const mask = document.getElementById('mask')
 const close = mask.querySelector('#toInfo')
 const counter = document.querySelector('#counter')
 const numEle = counter.querySelector('span')
+const counterClaim = counter.querySelector('a')
 const step1 = document.querySelector('#step1')
 
-let count = 0
+let _count = 0
 
 export const showText = () => {
   step1.classList.add('show')
@@ -22,7 +23,7 @@ export const setFontSize = () => {
   html.style.fontSize =
     ((0.53 - 420 / canvasContainer.clientWidth) / 2.5 + 1) * 16 + 'px'
 }
-export const bindEvent = (nextCB, backCB, onStepEnd) => {
+export const bindEvent = (nextCB, backCB, onStepEnd, onClaim) => {
   step1.addEventListener('animationend', function(e) {
     if (e.animationName === 'hide') {
       this.classList.remove('show')
@@ -34,36 +35,44 @@ export const bindEvent = (nextCB, backCB, onStepEnd) => {
     backCB && backCB()
     mask.style.display = 'none'
   })
-  claim.addEventListener('click', function () {})
+
+  counterClaim.addEventListener('click', function() {
+    onClaim && onClaim(_count)
+  })
+  claim.addEventListener('click', function() {
+    onClaim && onClaim(0)
+  })
   close.addEventListener('click', function() {
     mask.style.display = 'none'
   })
-  explore.addEventListener('click', function () {
+  explore.addEventListener('click', function() {
     nextCB && nextCB()
   })
 }
 
-export const showModal = (appInfo) => {
+export const showModal = (appInfo, checked) => {
   const nameEle = mask.querySelector('div.name')
   const imgEle = mask.querySelector('div.icon img')
   const descEle = mask.querySelector('div.desc')
   const explore = mask.querySelector('#toInfo')
   explore.href = appInfo.href
   nameEle.innerHTML = appInfo.name
-  descEle.innerHTML = appInfo.desc
+  descEle.innerHTML = appInfo.description
   imgEle.src = appInfo.img
   mask.style.display = 'block'
-  numEle.innerText = ++count
+  if (!checked) {
+    numEle.innerText = ++_count
+  }
 }
 export const showCounter = () => {
   counter.style.opacity = 1
 }
-(function winResize () {
+;(function winResize() {
   let timer = 0
-  window.onresize = function () {
+  window.onresize = function() {
     clearTimeout(timer)
 
-    timer = setTimeout(function () {
+    timer = setTimeout(function() {
       setFontSize()
     }, 500)
   }

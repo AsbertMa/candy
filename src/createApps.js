@@ -2,7 +2,7 @@ import App, { linear } from './createCanvas'
 import createPics from './createPics'
 async function getApp() {
   try {
-    const resp = await fetch('https://vechain.github.io/app-hub/sync.json', {
+    const resp = await fetch('http://192.168.117.23:3000/apps', {
       method: 'GET'
     })
     if (resp.status !== 200) {
@@ -14,19 +14,19 @@ async function getApp() {
   }
 }
 let appList = []
-getApp().then(apps => {
-  appList = apps
+let KEY = ''
+let rands = []
+getApp().then(resp => {
+  let result = resp.result
+  KEY = result.key
+  rands = result.rands
+  appList = result.apps
 })
-function randomApp(xBase, yBase) {
-  const list = appList
-  list.sort((a, b) => {
-    return 0.5 - Math.random()
-  })
-
-  return list.slice(0, 4).map(item => {
+function getAppList(xBase, yBase) {
+  return appList.map(item => {
     return {
       ...item,
-      img: `https://vechain.github.io/app-hub/imgs/${item.id}.png`,
+      img: `https://vechain.github.io/app-hub/imgs/${item.appID}.png`,
       x: Math.random() * xBase,
       y: Math.random() * yBase
     }
@@ -34,7 +34,7 @@ function randomApp(xBase, yBase) {
 }
 
 function addApps(app, onAppClick) {
-  const items = createPics(randomApp(app.view.width, app.view.height))
+  const items = createPics(getAppList(app.view.width, app.view.height))
   items.forEach(item => {
     item.anchor.x = 0.5
     item.anchor.y = 0.5
@@ -58,13 +58,14 @@ function addApps(app, onAppClick) {
           }
         })
         .on('pointerdown', function() {
+          console.log(item.checked)
           if (!this.checked) {
             this.alpha = 1
             this.scale.x *= 1.2
             this.scale.y *= 1.2
           }
+          onAppClick && onAppClick(item.info, item.checked)
           this.checked = true
-          onAppClick && onAppClick(item.info)
         })
     })
   }
@@ -104,5 +105,12 @@ function addApps(app, onAppClick) {
 }
 const createApps = onAppClick => {
   return addApps(App.instance, onAppClick)
+}
+
+export const getCheckInfo = () => {
+  return {
+    key: KEY,
+    rands
+  }
 }
 export default createApps

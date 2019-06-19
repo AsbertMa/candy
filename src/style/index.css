@@ -36,31 +36,63 @@ canvas, #step1 {
 
 #step1.show {
   display: block;
-  animation: show 0.5s ease-in-out 0.1s 1 normal both;
+  -webkit-animation: show 0.5s ease-in-out 0.1s 1 normal both;
+          animation: show 0.5s ease-in-out 0.1s 1 normal both;
 }
 #step1.hide {
-  animation: hide 0.5s ease-in-out 0.1s 1 normal both;
+  -webkit-animation: hide 0.5s ease-in-out 0.1s 1 normal both;
+          animation: hide 0.5s ease-in-out 0.1s 1 normal both;
+}
+
+@-webkit-keyframes show {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(310px, 0) scale(0);
+            transform: translate(310px, 0) scale(0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0) scale(1);
+            transform: translate(0, 0) scale(1);
+  }
 }
 
 @keyframes show {
   0% {
     opacity: 0;
-    transform: translate(310px, 0) scale(0);
+    -webkit-transform: translate(310px, 0) scale(0);
+            transform: translate(310px, 0) scale(0);
   }
   100% {
     opacity: 1;
-    transform: translate(0, 0) scale(1);
+    -webkit-transform: translate(0, 0) scale(1);
+            transform: translate(0, 0) scale(1);
+  }
+}
+
+@-webkit-keyframes hide {
+  0% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0) scale(1);
+            transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate(-3100px, 0) scale(10);
+            transform: translate(-3100px, 0) scale(10);
   }
 }
 
 @keyframes hide {
   0% {
     opacity: 1;
-    transform: translate(0, 0) scale(1);
+    -webkit-transform: translate(0, 0) scale(1);
+            transform: translate(0, 0) scale(1);
   }
   100% {
     opacity: 0;
-    transform: translate(-3100px, 0) scale(10);
+    -webkit-transform: translate(-3100px, 0) scale(10);
+            transform: translate(-3100px, 0) scale(10);
   }
 }
 
@@ -176,6 +208,7 @@ canvas, #step1 {
   display: inline-block;
   border-radius: 22px;
   line-height: 44px;
+  cursor: pointer;
   color: #fff;
   font-size: 22px;
   text-align: center;
