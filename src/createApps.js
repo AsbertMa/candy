@@ -2,7 +2,7 @@ import App, { linear } from './createCanvas'
 import createPics from './createPics'
 async function getApp() {
   try {
-    const resp = await fetch('https://vechain.github.io/app-hub/sync.json', {
+    const resp = await fetch('https://vechain.github.io/app-hub/index.json', {
       method: 'GET'
     })
     if (resp.status !== 200) {
