@@ -7,13 +7,14 @@ import {
   showModal,
   showCounter,
   showText,
-  hideText
+  hideText,
+  showInfo
 } from './eventBind'
 import createStar from './createStar'
 import createRocket from './createRocket'
 import createSpaceMan from './createSpaceMan'
 import createStatic from './createStatic'
-import createApps, { getCheckInfo } from './createApps'
+import createApps, { getCheckInfo, requestApp } from './createApps'
 import claimRequest from './claimRequest'
 
 function start() {
@@ -35,11 +36,7 @@ function start() {
 
   const onClaim = async num => {
     let info = getCheckInfo()
-    const resp = await claimRequest(
-      info.key,
-      num ? info.rands : null
-    )
-    console.log(resp)
+    const resp = await claimRequest(info.key, num ? info.rands : null)
   }
 
   const secViewInit = async () => {
@@ -68,6 +65,7 @@ function start() {
     rocket.hide().then(() => {
       secViewInit()
       showCounter()
+      showInfo()
     })
   }
 
@@ -84,4 +82,7 @@ function start() {
 
   bindEvent(onNext, onBack, onNextEnd, onClaim)
 }
-start()
+
+requestApp().then(() => {
+  start()
+})

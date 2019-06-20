@@ -16,12 +16,7 @@ async function getApp() {
 let appList = []
 let KEY = ''
 let rands = []
-getApp().then(resp => {
-  let result = resp.result
-  KEY = result.key
-  rands = result.rands
-  appList = result.apps
-})
+
 function getAppList(xBase, yBase) {
   return appList.map(item => {
     return {
@@ -107,6 +102,14 @@ const createApps = onAppClick => {
   return addApps(App.instance, onAppClick)
 }
 
+export const requestApp = async () => {
+  return getApp().then(resp => {
+    let result = resp.result
+    KEY = result.key
+    rands = result.rands
+    appList = result.apps
+  })
+}
 export const getCheckInfo = () => {
   return {
     key: KEY,

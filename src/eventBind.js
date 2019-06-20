@@ -3,6 +3,8 @@ const claim = document.getElementById('claim')
 const explore = document.getElementById('explore')
 const back = document.getElementById('back')
 const mask = document.getElementById('mask')
+const maskInfo = document.getElementById('mask-info')
+const maskInfoOk = maskInfo.querySelector('#checked')
 const close = mask.querySelector('#toInfo')
 const counter = document.querySelector('#counter')
 const numEle = counter.querySelector('span')
@@ -18,6 +20,13 @@ export const hideText = () => {
   step1.classList.add('hide')
 }
 
+export const showInfo = () => {
+  const show = !JSON.parse(localStorage.getItem('dont-show-info'))
+  if (show) {
+    maskInfo.style.display = 'block'
+  }
+}
+
 export const setFontSize = () => {
   const html = document.getElementsByTagName('html')[0]
   html.style.fontSize =
@@ -29,6 +38,14 @@ export const bindEvent = (nextCB, backCB, onStepEnd, onClaim) => {
       this.classList.remove('show')
       this.classList.remove('hide')
       onStepEnd && onStepEnd()
+    }
+  })
+
+  maskInfoOk.addEventListener('click', () => {
+    maskInfo.style.display = 'none'
+    const box = maskInfo.querySelector('input[type="checkbox"]')
+    if (box.checked) {
+      localStorage.setItem('dont-show-info', JSON.stringify(true))
     }
   })
   back.addEventListener('click', () => {
