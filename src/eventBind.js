@@ -80,7 +80,11 @@ export const showModal = (appInfo, checked) => {
   imgEle.src = appInfo.img
   mask.style.display = 'block'
   if (!checked) {
-    numEle.innerText = ++_count
+    const temp = ++_count
+    numEle.innerText = temp
+    if (temp === 4) {
+      counterClaim.classList.remove('disabled')
+    }
   }
 }
 export const showCounter = () => {
