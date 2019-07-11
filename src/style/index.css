@@ -164,30 +164,30 @@ canvas, #step1 {
   margin: auto;
   border-radius: 15px;
 }
-#welcome,
+.welcome,
 #app-content {
   text-align: center;
   padding: 0 40px;
 }
 
-#welcome .icon,
+.welcome .icon,
 #app-content .icon {
   width: 95px;
   height: 95px;
   margin: auto;
   margin-top: 50px;
 }
-#welcome .icon img,
+.welcome .icon img,
 #app-content .icon img {
   width: 100%;
   border-radius: 7px;
 }
-#welcome .name,
+.welcome .name,
 #app-content .name {
   font-size: 28px;
   padding: 20px 0 15px;
 }
-#welcome .desc,
+.welcome .desc,
 #app-content .desc {
   text-align: left;
   font-size: 18px;

@@ -36,7 +36,15 @@ function start() {
 
   const onClaim = async num => {
     let info = getCheckInfo()
-    const resp = await claimRequest(info.key, num ? info.rands : null)
+    let result
+    try {
+      const resp = await claimRequest(info.key, num ? info.rands : null)
+      result = resp
+    } catch (error) {
+      result = error
+    }
+
+    return result
   }
 
   const secViewInit = async () => {

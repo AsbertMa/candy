@@ -10,6 +10,8 @@ const counter = document.querySelector('#counter')
 const numEle = counter.querySelector('span')
 const counterClaim = counter.querySelector('a')
 const step1 = document.querySelector('#step1')
+const maskWarning = document.getElementById('mask-warning')
+const mwbtn = maskWarning.querySelector('a')
 
 let _count = 0
 
@@ -25,6 +27,59 @@ export const showInfo = () => {
   if (show) {
     maskInfo.style.display = 'block'
   }
+}
+
+function handleClaim(msg) {
+  console.log(msg)
+  let type = msg && msg.code || 0
+  let info = {}
+  switch (type) {
+    case 1:
+      info = {
+        img: require('./assets/candy-error.png'),
+        title: 'Oops...',
+        msg: 'Connex environment if missing...',
+        btn: 'Download',
+        href: ''
+      }
+      break;
+    case 2:
+      info = {
+        img: require('./assets/candy-error.png'),
+        title: 'Oops...',
+        msg: 'Cant claim the reward when you refuse to sign the certificate',
+        btn: 'OK',
+        href: ''
+      }
+      break;
+    case 0:
+        let id = msg.id.slice(0, 8) + '…' + msg.id.slice(txId.length - 9)
+        info = {
+          img: require('./assets/success.png'),
+          title: 'Success',
+          msg: `Your reward is on the way, TxID: <a href="" target="_blank">${id} </a>`,
+          btn: 'OK'
+        }
+      break;
+    default:
+      info = {
+        img: require('./assets/candy-error.png'),
+        title: 'Oops...',
+        msg: msg.code === 20 ? 'Request timeout' : msg.message,
+        btn: 'OK'
+      }
+      break;
+  }
+
+  let name = maskWarning.querySelector('.name')
+  let desc = maskWarning.querySelector('.desc')
+  let img = maskWarning.querySelector('img')
+  
+  name.innerHTML = info.title
+  desc.innerHTML = info.msg
+  img.src = info.img
+  mwbtn.innerHTML = info.btn
+  maskWarning.style.display = 'block'
 }
 
 export const setFontSize = () => {
@@ -48,20 +103,35 @@ export const bindEvent = (nextCB, backCB, onStepEnd, onClaim) => {
       localStorage.setItem('dont-show-info', JSON.stringify(true))
     }
   })
+
+  mwbtn.addEventListener('click', (e) => {
+    let text = e.target.innerText
+    if (text.toLowerCase() === 'download') {
+      window.open('https://env.vechain.org/')
+    }
+    maskWarning.style.display = 'none'
+  })
+
   back.addEventListener('click', () => {
     backCB && backCB()
     mask.style.display = 'none'
   })
 
-  counterClaim.addEventListener('click', function() {
+  counterClaim.addEventListener('click', async function() {
     if (_count === 4) {
-      onClaim && onClaim(_count)
+      if(onClaim) {
+        const resp = await onClaim(_count)
+        handleClaim(resp)
+      }
     }
   })
-  claim.addEventListener('click', function() {
-    onClaim && onClaim(0)
+  claim.addEventListener('click', async function() {
+    if(onClaim) {
+      const resp = await onClaim(0)
+      handleClaim(resp)
+    }
   })
-  close.addEventListener('click', function() {
+  close.addEventListener('click', function(e) {
     mask.style.display = 'none'
   })
   explore.addEventListener('click', function() {
