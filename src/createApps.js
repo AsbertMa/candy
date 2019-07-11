@@ -1,18 +1,7 @@
 import App, { linear } from './createCanvas'
 import createPics from './createPics'
-async function getApp() {
-  try {
-    const resp = await fetch('http://192.168.50.159:3000/apps', {
-      method: 'GET'
-    })
-    if (resp.status !== 200) {
-      return
-    }
-    return await resp.json()
-  } catch (error) {
-    console.error(error)
-  }
-}
+import fetchRequest from './fetch'
+
 let appList = []
 let KEY = ''
 let rands = []
@@ -103,12 +92,16 @@ const createApps = onAppClick => {
 }
 
 export const requestApp = async () => {
-  return getApp().then(resp => {
+  try {
+    const resp = await fetchRequest('apps', 'get', {})
     let result = resp.result
     KEY = result.key
     rands = result.rands
     appList = result.apps
-  })
+  } catch (error) {
+    // error action
+    console.log(error)
+  }
 }
 export const getCheckInfo = () => {
   return {
